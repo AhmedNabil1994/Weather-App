@@ -79,14 +79,23 @@ footer {
     font-weight: 300;
     color: #bfc1c8;
   }
-
   .links a {
     text-decoration: none;
     span {
+      transition: all 0.3s;
       font-size: 1.25rem;
       color: var(--first-color);
       :last-child {
         color: var(--third-color);
+        transition: inherit;
+      }
+    }
+    &:hover {
+      span {
+        color: var(--third-color);
+        :last-child {
+          color: white;
+        }
       }
     }
   }
@@ -94,7 +103,7 @@ footer {
 section#search {
   background-image: url("../images/banner.png");
   background-size: cover;
-  height: 350px;
+  height: 21.875rem;
   button.btn {
     padding-inline: 2.5rem;
   }
@@ -124,7 +133,7 @@ section#search {
   }
 }
 @media screen and (max-width: 400px) {
-  footer button.btn {
+  button.btn {
     position: static;
     margin-top: 1.25rem;
     width: 100%;
