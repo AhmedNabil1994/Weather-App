@@ -3,6 +3,9 @@
   --second-color: #323544;
   --third-color: #009ad8;
   --fourth-color: #262936;
+  --card--header-color-1: #2d303d;
+  --card--header-color-2: #222530;
+  --card-text-color: #bfc1c8;
 }
 /* shared classes */
 /* inputs */
@@ -41,6 +44,7 @@ body {
   font-family: sans-serif;
   background-color: var(--first-color);
 }
+
 /* navbar */
 nav#nav {
   .navbar-brand p {
@@ -100,6 +104,8 @@ footer {
     }
   }
 }
+
+/* search */
 section#search {
   background-image: url("../images/banner.png");
   background-size: cover;
@@ -108,8 +114,97 @@ section#search {
     padding-inline: 2.5rem;
   }
 }
+
+/* weather cards */
+section#weather {
+  margin-top: -9.375rem;
+  margin-bottom: 3.125rem;
+  .card {
+    height: 100%;
+    border: none;
+    margin-inline: -0.75rem;
+    /* shared */
+    .card-header {
+      font-size: 0.875rem;
+      color: var(--card-text-color);
+    }
+    &.card_1,
+    &.card_3 {
+      .card-header {
+        background-color: var(--card--header-color-1);
+      }
+      .card-body {
+        background-color: var(--second-color);
+      }
+    }
+    &.card_2,
+    &.card_3 {
+      .card-body {
+        .card-title,
+        .card-text {
+          color: white;
+        }
+        .card-text {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+        .status {
+          font-weight: 300;
+          p:first-child {
+            color: var(--card-text-color);
+          }
+          p:last-child {
+            color: var(--third-color);
+            font-size: 0.875rem;
+          }
+        }
+      }
+    }
+    /* each card */
+    &.card_1 {
+      .card-title {
+        color: var(--card-text-color);
+        font-size: 1.125rem;
+      }
+      .card-text {
+        color: white;
+        font-weight: 700;
+        font-size: 5.625rem;
+      }
+      .card-body .status p {
+        color: var(--third-color);
+        font-size: 0.875rem;
+        font-weight: 300;
+      }
+      .card-body .status i {
+        color: #ffe50b;
+      }
+      .card-body .icons {
+        color: var(--card-text-color);
+      }
+    }
+    &.card_2 {
+      .card-header {
+        background-color: var(--card--header-color-2);
+      }
+      .card-body {
+        background-color: var(--fourth-color);
+      }
+    }
+  }
+}
+
 /* media */
+@media screen and (max-width: 1200px) {
+  /* weather cards */
+  section#weather {
+    .card.card_1 .card-text {
+      font-size: 5rem;
+    }
+  }
+}
 @media screen and (max-width: 991px) {
+  /* navbar */
   #navbarSupportedContent {
     padding: 1.25rem 0;
     text-align: center;
@@ -132,10 +227,26 @@ section#search {
     }
   }
 }
+@media screen and (max-width: 576px) {
+  /* weather cards */
+  section#weather {
+    .card {
+      margin-inline: 0.625rem;
+    }
+  }
+}
 @media screen and (max-width: 400px) {
+  /* search */
   button.btn {
     position: static;
     margin-top: 1.25rem;
     width: 100%;
+  }
+  /* weather cards */
+  section#weather {
+    .card.card_1 .card-text {
+      margin-inline: 0.625rem;
+      font-size: 4.0625rem;
+    }
   }
 }
