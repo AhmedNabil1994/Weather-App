@@ -2,9 +2,10 @@
 // DOM elements
 const navLinksParent = document.querySelector("ul.navbar-nav");
 const weatherCardsContainer = document.querySelector("#weather .row");
-console.log(weatherCardsContainer);
-// arrays
-
+// variables
+const url =
+  "http://api.weatherapi.com/v1/forecast.json?key=d185b75d38f2481da10172021241012&q=cairo&days=3";
+let weatherDetails;
 // events
 navLinksParent.addEventListener("click", function (e) {
   styleClickedLink(e.target);
@@ -21,60 +22,89 @@ function styleClickedLink(clickedLink) {
 }
 
 function displayCards() {
-  let cardEls = "";
+  let cards = "";
   for (let index = 0; index < 3; index++) {
     if (index === 0) {
-      cardEls += ` <div class="col-md-6 col-lg-4 ">
-            <div class="card card_${index+1}">
+      cards += ` <div class="col-md-6 col-lg-4 ">
+            <div class="card card_${index + 1}">
               <div class="card-header d-flex justify-content-between">
                 <p class="m-0">Monday</p>
                 <p class="m-0">9December</p>
               </div>
               <div class="card-body py-5">
-                <h5 class="card-title">Cairo</h5>
-                <p class="card-text">23.1oC</p>
-                <div class="d-flex justify-content-between status">
-                  <i class="fa-solid fa-sun"></i>
-                  <p>Sunny</p>
+                <h5 class="card-title">${weatherDetails.location.name}</h5>
+                <p class="card-text">${weatherDetails.current.temp_c}&deg;C</p>
+                <div class="d-flex justify-content-between align-items-center status">
+                  <img src="${weatherDetails.current.condition.icon}" alt="${
+        weatherDetails.current.condition.text
+      }">
+                  <p class="m-0">${weatherDetails.current.condition.text}</p>
                 </div>
                 <div class="icons d-flex">
                   <div class="me-2">
                     <i class="fa-solid fa-umbrella"></i>
-                    <span>20%</span>
+                    <span>${
+                      weatherDetails.forecast.forecastday[index].day
+                        .daily_chance_of_rain
+                    }%</span>
                   </div>
                   <div class="me-2">
                     <i class="fa-solid fa-wind"></i>
-                    <span>18km/h</span>
+                    <span>${weatherDetails.current.wind_kph}km/h</span>
                   </div>
                   <div>
                     <i class="fa-solid fa-compass"></i>
-                    <span>East</span>
+                    <span>${weatherDetails.current.wind_dir}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>`;
     } else {
-      cardEls += `<div class="col-md-6 col-lg-4">
-            <div class="card card_${index+1} text-center">
+      cards += `<div class="col-md-6 col-lg-4">
+            <div class="card card_${index + 1} text-center">
               <div class="card-header">
                 <p class="m-0">Tuesday</p>
               </div>
               <div class="card-body py-5">
                 <h5 class="card-title">
-                  <i class="fa-solid fa-cloud-sun"></i>
+                  <img src="${
+                    weatherDetails.forecast.forecastday[index].day.condition
+                      .icon
+                  }" alt="${
+        weatherDetails.forecast.forecastday[index].day.condition.text
+      }">
                 </h5>
-                <p class="card-text">23.1oC</p>
+                <p class="card-text">${
+                  weatherDetails.forecast.forecastday[index].day.maxtemp_c
+                }&deg;C</p>
                 <div class="status">
-                  <p class="">14.1o</p>
-                  <p class="m-0">Partly Cloudy</p>
+                  <p class="">${
+                    weatherDetails.forecast.forecastday[index].day.mintemp_c
+                  }&deg;</p>
+                  <p class="m-0">${
+                    weatherDetails.forecast.forecastday[index].day.condition
+                      .text
+                  }</p>
                 </div>
               </div>
             </div>
           </div>`;
     }
   }
-  weatherCardsContainer.innerHTML = cardEls
+  weatherCardsContainer.innerHTML = cards;
 }
 
-displayCards();
+(function getWeather() {
+  let req = new XMLHttpRequest();
+  req.open("GET", url);
+  req.send();
+  req.responseType = "json";
+  req.addEventListener("load", () => {
+    if (req.status >= 200 && req.status < 300) {
+      weatherDetails = req.response;
+      console.log(weatherDetails);
+      displayCards();
+    }
+  });
+})();

@@ -119,6 +119,9 @@ section#search {
 section#weather {
   margin-top: -9.375rem;
   margin-bottom: 3.125rem;
+  .content {
+    padding-inline: 12px;
+  }
   .card {
     height: 100%;
     border: none;
@@ -140,11 +143,8 @@ section#weather {
     &.card_2,
     &.card_3 {
       .card-body {
-        .card-title,
         .card-text {
           color: white;
-        }
-        .card-text {
           font-size: 1.5rem;
           font-weight: 700;
         }
@@ -175,9 +175,6 @@ section#weather {
         color: var(--third-color);
         font-size: 0.875rem;
         font-weight: 300;
-      }
-      .card-body .status i {
-        color: #ffe50b;
       }
       .card-body .icons {
         color: var(--card-text-color);
@@ -224,14 +221,6 @@ section#weather {
           }
         }
       }
-    }
-  }
-}
-@media screen and (max-width: 576px) {
-  /* weather cards */
-  section#weather {
-    .card {
-      margin-inline: 0.625rem;
     }
   }
 }
