@@ -105,8 +105,8 @@ footer {
   }
 }
 
-/* search */
-section#search {
+/* search-bg */
+section.search-bg {
   background-image: url("../images/banner.png");
   background-size: cover;
   height: 21.875rem;
@@ -241,7 +241,7 @@ section#weather {
   }
 }
 @media screen and (max-width: 400px) {
-  /* search */
+  /* search-bg */
   button.btn {
     position: static;
     margin-top: 1.25rem;

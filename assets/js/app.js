@@ -2,11 +2,16 @@
 // DOM elements
 const navLinksParent = document.querySelector("ul.navbar-nav");
 const weatherCardsContainer = document.querySelector("#weather .row");
+const searchInput = document.getElementById("search");
 // variables
 
 // events
 navLinksParent.addEventListener("click", function (e) {
   styleClickedLink(e.target);
+});
+
+searchInput.addEventListener("input", function (e) {
+  getWeather(e.target.value);
 });
 
 // functions
@@ -75,8 +80,7 @@ function displayCards(weatherData) {
               <div class="card-body py-5">
                 <h5 class="card-title">
                   <img src="${
-                    weatherData.forecast.forecastday[index].day.condition
-                      .icon
+                    weatherData.forecast.forecastday[index].day.condition.icon
                   }" alt="${
         weatherData.forecast.forecastday[index].day.condition.text
       }">
@@ -89,8 +93,7 @@ function displayCards(weatherData) {
                     weatherData.forecast.forecastday[index].day.mintemp_c
                   }&deg;</p>
                   <p class="m-0">${
-                    weatherData.forecast.forecastday[index].day.condition
-                      .text
+                    weatherData.forecast.forecastday[index].day.condition.text
                   }</p>
                 </div>
               </div>
