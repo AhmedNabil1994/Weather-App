@@ -126,6 +126,8 @@ section#weather {
     height: 100%;
     border: none;
     margin-inline: -0.75rem;
+    border-radius: 30px;
+    background-color: transparent;
     /* shared */
     .card-header {
       font-size: 0.875rem;
@@ -162,6 +164,9 @@ section#weather {
     }
     /* each card */
     &.card_1 {
+      .card-header {
+        border-top-left-radius: 15px;
+      }
       .card-title {
         color: var(--card-text-color);
         font-size: 1.125rem;
@@ -171,13 +176,16 @@ section#weather {
         font-weight: 700;
         font-size: 5.625rem;
       }
-      .card-body .status p {
-        color: var(--third-color);
-        font-size: 0.875rem;
-        font-weight: 300;
-      }
-      .card-body .icons {
-        color: var(--card-text-color);
+      .card-body {
+        border-bottom-left-radius: 15px;
+        .status p {
+          color: var(--third-color);
+          font-size: 0.875rem;
+          font-weight: 300;
+        }
+        .icons {
+          color: var(--card-text-color);
+        }
       }
     }
     &.card_2 {
@@ -186,6 +194,14 @@ section#weather {
       }
       .card-body {
         background-color: var(--fourth-color);
+      }
+    }
+    &.card_3 {
+      .card-header {
+        border-top-right-radius: 15px;
+      }
+      .card-body {
+        border-bottom-right-radius: 15px;
       }
     }
   }
