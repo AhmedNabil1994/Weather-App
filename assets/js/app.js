@@ -28,8 +28,14 @@ function displayCards() {
       cards += ` <div class="col-md-6 col-lg-4 ">
             <div class="card card_${index + 1}">
               <div class="card-header d-flex justify-content-between">
-                <p class="m-0">Monday</p>
-                <p class="m-0">9December</p>
+                <p class="m-0">${new Date(
+                  weatherDetails.forecast.forecastday[index].date
+                ).toLocaleString("en-US", { weekday: "long" })}</p>
+                <p class="m-0">${new Date(
+                  weatherDetails.forecast.forecastday[index].date
+                ).getDate()}${new Date(
+        weatherDetails.forecast.forecastday[index].date
+      ).toLocaleString("en-US", { month: "long" })}</p>
               </div>
               <div class="card-body py-5">
                 <h5 class="card-title">${weatherDetails.location.name}</h5>
@@ -64,7 +70,9 @@ function displayCards() {
       cards += `<div class="col-md-6 col-lg-4">
             <div class="card card_${index + 1} text-center">
               <div class="card-header">
-                <p class="m-0">Tuesday</p>
+                <p class="m-0">${new Date(
+                  weatherDetails.forecast.forecastday[index].date
+                ).toLocaleString("en-US", { weekday: "long" })}</p>
               </div>
               <div class="card-body py-5">
                 <h5 class="card-title">
