@@ -35,9 +35,11 @@ button.btn {
   right: 5px;
   bottom: 5px;
   font-size: 0.875rem;
-  &:hover {
-    background-color: var(--third-color);
-    color: white;
+  &:hover,
+  &:active {
+    background-color: var(--third-color) !important;
+    color: white !important;
+    border-color: var(--third-color) !important ;
   }
 }
 body {
