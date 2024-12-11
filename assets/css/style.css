@@ -77,36 +77,6 @@ nav#nav {
   }
 }
 
-/* footer */
-footer {
-  background-color: var(--fourth-color);
-  p {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: #bfc1c8;
-  }
-  .links a {
-    text-decoration: none;
-    span {
-      transition: all 0.3s;
-      font-size: 1.25rem;
-      color: var(--first-color);
-      :last-child {
-        color: var(--third-color);
-        transition: inherit;
-      }
-    }
-    &:hover {
-      span {
-        color: var(--third-color);
-        :last-child {
-          color: white;
-        }
-      }
-    }
-  }
-}
-
 /* search-bg */
 section.search-bg {
   background-image: url("../images/banner.png");
@@ -193,6 +163,7 @@ section#weather {
     &.card_2 {
       .card-header {
         background-color: var(--card--header-color-2);
+        border-top-left-radius: 0;
       }
       .card-body {
         background-color: var(--fourth-color);
@@ -201,9 +172,40 @@ section#weather {
     &.card_3 {
       .card-header {
         border-top-right-radius: 15px;
+        border-top-left-radius: 0;
       }
       .card-body {
         border-bottom-right-radius: 15px;
+      }
+    }
+  }
+}
+
+/* footer */
+footer {
+  background-color: var(--fourth-color);
+  p {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: #bfc1c8;
+  }
+  .links a {
+    text-decoration: none;
+    span {
+      transition: all 0.3s;
+      font-size: 1.25rem;
+      color: var(--first-color);
+      :last-child {
+        color: var(--third-color);
+        transition: inherit;
+      }
+    }
+    &:hover {
+      span {
+        color: var(--third-color);
+        :last-child {
+          color: white;
+        }
       }
     }
   }
@@ -218,6 +220,7 @@ section#weather {
     }
   }
 }
+
 @media screen and (max-width: 991px) {
   /* navbar */
   #navbarSupportedContent {
@@ -242,6 +245,21 @@ section#weather {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  /* weather cards */
+  section#weather {
+    .card.card_1,
+    .card.card_2,
+    .card.card_3 {
+      .card-header {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 400px) {
   /* search-bg */
   button.btn {
