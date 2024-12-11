@@ -65,23 +65,41 @@
     </header>
     <section class="py-5 search-bg">
       <div class="container">
-        <form>
-          <div class="mb-3 position-relative">
-            <input
-              id="search"
-              type="search"
-              class="form-control rounded-5"
-              placeholder="Find your location..."
-              aria-label="An input field to search"
-              aria-describedby="basic-addon2"
-            />
-            <button type="button" class="btn rounded-5">Find</button>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3 position-relative">
+              <input
+                id="search"
+                type="search"
+                class="form-control rounded-5"
+                placeholder="Find your location..."
+                aria-label="An input field to search"
+                aria-describedby="basic-addon2"
+              />
+              <button type="button" class="btn rounded-5">Find</button>
+            </div>
+            <form></form>
           </div>
-        </form>
+          <div class="col-md-6">
+            <div class="mb-3 position-relative">
+              <input
+                id="number"
+                type="number"
+                class="form-control rounded-5"
+                placeholder="Enter number of days per week..."
+                aria-label="Week number of days"
+                aria-describedby="basic-addon2"
+              />
+              <button type="button" class="btn rounded-5 addBtn">Add</button>
+            </div>
+          </div>
+          <form></form>
+        </div>
       </div>
     </section>
     <section id="weather">
-      <p class="errr-msg text-warning text-center h3 d-none fw-bold"></p>
+      <p class="errr-msg-search text-warning text-center h3 d-none fw-bold"></p>
+      <p class="errr-msg-number text-warning text-center h3 d-none fw-bold">Enter a number between 1 and 7 </p>
       <div class="container">
         <div class="content">
           <div class="row g-4"></div>

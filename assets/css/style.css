@@ -304,4 +304,7 @@ footer {
     margin-top: 1.25rem;
     width: 100%;
   }
+  section#weather {
+    margin-top: 1.25rem;
+  }
 }

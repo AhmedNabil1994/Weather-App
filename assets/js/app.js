@@ -3,18 +3,33 @@
 const navLinksParent = document.querySelector("ul.navbar-nav");
 const weatherCardsContainer = document.querySelector("#weather .row");
 const searchInput = document.getElementById("search");
+const numberInput = document.getElementById("number");
+const addBtn = document.querySelector(".addBtn");
+const searchErrorMsg = document.querySelector(".errr-msg-search");
+const numberErrorMsg = document.querySelector(".errr-msg-number");
+
 // variables
 const baseURL = "http://api.weatherapi.com/v1";
 const forecast = "/forecast.json";
 const key = "d185b75d38f2481da10172021241012";
-const numOfDays = 7;
+// const numOfDays = 7;
+
 // events
 navLinksParent.addEventListener("click", function (e) {
   styleClickedLink(e.target);
 });
 
 searchInput.addEventListener("input", function (e) {
-  getWeather(e.target.value);
+  getWeather(e.target.value, numberInput.value || 3);
+});
+
+addBtn.addEventListener("click", function () {
+  const numOfDays = +numberInput.value;
+  if (validateNumInput()) {
+    getWeather(searchInput.value || "cairo", numOfDays);
+    // clear input
+    numberInput.value = "";
+  }
 });
 
 // functions
@@ -27,7 +42,7 @@ function styleClickedLink(clickedLink) {
   }
 }
 
-function displayCards(weatherData) {
+function displayCards(weatherData, numOfDays = 3) {
   let cards = "";
   for (let index = 0; index < numOfDays; index++) {
     if (index === 0) {
@@ -108,27 +123,38 @@ function displayCards(weatherData) {
 }
 
 getWeather();
-async function getWeather(city = "cairo") {
-  const errorMsg = document.querySelector(".errr-msg");
+async function getWeather(city = "cairo", numOfDays = 3) {
+  console.log(searchErrorMsg);
   try {
-    errorMsg.classList.add("d-none");
-    // in api
+    searchErrorMsg.classList.add("d-none");
     let res = await fetch(
       `${baseURL}${forecast}?key=${key}&q=${city}&days=${numOfDays}`
     );
     let weatherDetails = await res.json();
     if (res.ok) {
       console.log(weatherDetails);
-      displayCards(weatherDetails);
-      errorMsg.classList.add("d-none");
+      displayCards(weatherDetails, numOfDays);
+      searchErrorMsg.classList.add("d-none");
     } else {
       console.log(weatherDetails.error);
-      errorMsg.innerHTML = "No matching location found.";
-      errorMsg.classList.remove("d-none");
+      searchErrorMsg.innerHTML = "No matching location found.";
+      searchErrorMsg.classList.remove("d-none");
     }
   } catch (error) {
     console.log(error);
-    errorMsg.innerHTML = "Invalid URL";
-    errorMsg.classList.remove("d-none");
+    searchErrorMsg.innerHTML = "Invalid URL";
+    searchErrorMsg.classList.remove("d-none");
+  }
+}
+
+function validateNumInput() {
+  const regex = /[1-7]/;
+  console.log(regex.test(numberInput.value));
+  if (regex.test(numberInput.value)) {
+    numberErrorMsg.classList.add("d-none");
+    return true;
+  } else {
+    numberErrorMsg.classList.remove("d-none");
+    return false;
   }
 }
