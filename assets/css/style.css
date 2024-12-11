@@ -6,6 +6,7 @@
   --card--header-color-1: #2d303d;
   --card--header-color-2: #222530;
   --card-text-color: #bfc1c8;
+  --card-border-radius: .9375rem;
 }
 /* shared classes */
 /* inputs */
@@ -94,19 +95,33 @@ section#weather {
   .content {
     padding-inline: 12px;
   }
-  .card {
-    height: 100%;
-    border: none;
-    margin-inline: -0.75rem;
-    border-radius: 30px;
-    background-color: transparent;
-    /* shared */
-    .card-header {
-      font-size: 0.875rem;
-      color: var(--card-text-color);
+  .row .box {
+    &:first-child {
+      .card-header {
+        border-top-left-radius: var(--card-border-radius);
+      }
+      .card-title {
+        color: var(--card-text-color);
+        font-size: 1.125rem;
+      }
+      .card-text {
+        color: white;
+        font-weight: 700;
+        font-size: 5.625rem;
+      }
+      .card-body {
+        border-bottom-left-radius: var(--card-border-radius);
+        .status p {
+          color: var(--third-color);
+          font-size: 0.875rem;
+          font-weight: 300;
+        }
+        .icons {
+          color: var(--card-text-color);
+        }
+      }
     }
-    &.card_1,
-    &.card_3 {
+    &:nth-child(odd) {
       .card-header {
         background-color: var(--card--header-color-1);
       }
@@ -114,8 +129,15 @@ section#weather {
         background-color: var(--second-color);
       }
     }
-    &.card_2,
-    &.card_3 {
+    &:nth-child(even) {
+      .card-header {
+        background-color: var(--card--header-color-2);
+      }
+      .card-body {
+        background-color: var(--fourth-color);
+      }
+    }
+    &:not(:first-child) {
       .card-body {
         .card-text {
           color: white;
@@ -134,48 +156,63 @@ section#weather {
         }
       }
     }
-    /* each card */
-    &.card_1 {
+    /* card 2,5,8,.... */
+    &:nth-child(3n-1) {
       .card-header {
-        border-top-left-radius: 15px;
+        border-top-left-radius: 0;
+      }
+    }
+    /* card 1,4,7,.... */
+    &:nth-child(3n-2) {
+      .card-header {
+        border-top-left-radius: var(--card-border-radius);
       }
       .card-title {
-        color: var(--card-text-color);
         font-size: 1.125rem;
       }
-      .card-text {
-        color: white;
-        font-weight: 700;
-        font-size: 5.625rem;
-      }
       .card-body {
-        border-bottom-left-radius: 15px;
-        .status p {
-          color: var(--third-color);
-          font-size: 0.875rem;
-          font-weight: 300;
-        }
-        .icons {
-          color: var(--card-text-color);
-        }
+        border-bottom-left-radius: var(--card-border-radius);
       }
     }
-    &.card_2 {
+    /* card 3,6,9,.... */
+    &:nth-child(3n) {
       .card-header {
-        background-color: var(--card--header-color-2);
+        border-top-right-radius: var(--card-border-radius);
         border-top-left-radius: 0;
       }
       .card-body {
-        background-color: var(--fourth-color);
+        border-bottom-right-radius: var(--card-border-radius);
       }
     }
-    &.card_3 {
+    /* last element and nothing before and after it */
+    &:last-child {
       .card-header {
-        border-top-right-radius: 15px;
-        border-top-left-radius: 0;
+        border-top-right-radius: var(--card-border-radius);
       }
       .card-body {
-        border-bottom-right-radius: 15px;
+        border-bottom-right-radius: var(--card-border-radius);
+      }
+    }
+    &:last-child:nth-child(3n - 2) {
+      .card-header {
+        border-top-right-radius: var(--card-border-radius);
+        border-top-left-radius: var(--card-border-radius);
+      }
+      .card-body {
+        border-bottom-right-radius: var(--card-border-radius);
+        border-bottom-left-radius: var(--card-border-radius);
+      }
+    }
+    .card {
+      height: 100%;
+      border: none;
+      margin-inline: -0.75rem;
+      border-radius: 30px;
+      background-color: transparent;
+      /* shared */
+      .card-header {
+        font-size: 0.875rem;
+        color: var(--card-text-color);
       }
     }
   }
@@ -249,14 +286,14 @@ footer {
 @media screen and (max-width: 768px) {
   /* weather cards */
   section#weather {
-    .card.card_1,
-    .card.card_2,
-    .card.card_3 {
-      .card-header {
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-      }
-    }
+    .row .box .card .card-header {
+       border-top-left-radius: var(--card-border-radius);
+       border-top-right-radius: var(--card-border-radius);
+     }
+    .row .box .card .card-body {
+       border-bottom-left-radius: var(--card-border-radius);
+       border-bottom-right-radius: var(--card-border-radius);
+     }
   }
 }
 
@@ -266,12 +303,5 @@ footer {
     position: static;
     margin-top: 1.25rem;
     width: 100%;
-  }
-  /* weather cards */
-  section#weather {
-    .card.card_1 .card-text {
-      margin-inline: 0.625rem;
-      font-size: 4.0625rem;
-    }
   }
 }

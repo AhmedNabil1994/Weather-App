@@ -4,7 +4,10 @@ const navLinksParent = document.querySelector("ul.navbar-nav");
 const weatherCardsContainer = document.querySelector("#weather .row");
 const searchInput = document.getElementById("search");
 // variables
-
+const baseURL = "http://api.weatherapi.com/v1";
+const forecast = "/forecast.json";
+const key = "d185b75d38f2481da10172021241012";
+const numOfDays = 7;
 // events
 navLinksParent.addEventListener("click", function (e) {
   styleClickedLink(e.target);
@@ -26,10 +29,10 @@ function styleClickedLink(clickedLink) {
 
 function displayCards(weatherData) {
   let cards = "";
-  for (let index = 0; index < 3; index++) {
+  for (let index = 0; index < numOfDays; index++) {
     if (index === 0) {
-      cards += ` <div class="col-md-6 col-lg-4 ">
-            <div class="card card_${index + 1}">
+      cards += ` <div class="col-md-6 col-lg-4 box">
+            <div class="card">
               <div class="card-header d-flex justify-content-between">
                 <p class="m-0">${new Date(
                   weatherData.forecast.forecastday[index].date
@@ -70,8 +73,8 @@ function displayCards(weatherData) {
             </div>
           </div>`;
     } else {
-      cards += `<div class="col-md-6 col-lg-4">
-            <div class="card card_${index + 1} text-center">
+      cards += `<div class="col-md-6 col-lg-4 box">
+            <div class="card text-center">
               <div class="card-header">
                 <p class="m-0">${new Date(
                   weatherData.forecast.forecastday[index].date
@@ -104,14 +107,28 @@ function displayCards(weatherData) {
   weatherCardsContainer.innerHTML = cards;
 }
 
-getWeather("cairo");
-async function getWeather(city) {
-  let res = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=d185b75d38f2481da10172021241012&q=${city}&days=3`
-  );
-  if (res.ok) {
+getWeather();
+async function getWeather(city = "cairo") {
+  const errorMsg = document.querySelector(".errr-msg");
+  try {
+    errorMsg.classList.add("d-none");
+    // in api
+    let res = await fetch(
+      `${baseURL}${forecast}?key=${key}&q=${city}&days=${numOfDays}`
+    );
     let weatherDetails = await res.json();
-    console.log(weatherDetails);
-    displayCards(weatherDetails);
+    if (res.ok) {
+      console.log(weatherDetails);
+      displayCards(weatherDetails);
+      errorMsg.classList.add("d-none");
+    } else {
+      console.log(weatherDetails.error);
+      errorMsg.innerHTML = "No matching location found.";
+      errorMsg.classList.remove("d-none");
+    }
+  } catch (error) {
+    console.log(error);
+    errorMsg.innerHTML = "Invalid URL";
+    errorMsg.classList.remove("d-none");
   }
 }
