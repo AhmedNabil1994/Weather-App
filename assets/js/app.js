@@ -104,20 +104,34 @@ function displayCards(weatherData) {
   weatherCardsContainer.innerHTML = cards;
 }
 
+// getWeather("cairo");
+// using ajax----
+// function getWeather(city) {
+//   let req = new XMLHttpRequest();
+//   req.open(
+//     "GET",
+//     `http://api.weatherapi.com/v1/forecast.json?key=d185b75d38f2481da10172021241012&q=${city}&days=3`
+//   );
+//   req.send();
+//   req.responseType = "json";
+//   req.addEventListener("load", () => {
+//     if (req.status >= 200 && req.status < 300) {
+//       let weatherDetails = req.response;
+//       console.log(weatherDetails);
+//       displayCards(weatherDetails);
+//     }
+//   });
+// }
+
 getWeather("cairo");
-function getWeather(city) {
-  let req = new XMLHttpRequest();
-  req.open(
-    "GET",
+// using fetch----
+async function getWeather(city) {
+  let res = await fetch(
     `http://api.weatherapi.com/v1/forecast.json?key=d185b75d38f2481da10172021241012&q=${city}&days=3`
   );
-  req.send();
-  req.responseType = "json";
-  req.addEventListener("load", () => {
-    if (req.status >= 200 && req.status < 300) {
-      let weatherDetails = req.response;
-      console.log(weatherDetails);
-      displayCards(weatherDetails);
-    }
-  });
+  if (res.ok) {
+    let weatherDetails = await res.json();
+    console.log(weatherDetails);
+    displayCards(weatherDetails);
+  }
 }
