@@ -46,9 +46,6 @@ function displayCards(weatherData, numOfDays = 3) {
   const { current } = weatherData;
   const { forecast } = weatherData;
   const { location } = weatherData;
-  console.log(weatherData, " weatherData");
-  // console.log(forecast, " forecast");
-  // console.log(location, " location");
   for (let index = 0; index < numOfDays; index++) {
     if (index === 0) {
       cards += ` <div class="col-md-6 col-lg-4 box">
@@ -59,7 +56,7 @@ function displayCards(weatherData, numOfDays = 3) {
                 ).toLocaleString("en-US", { weekday: "long" })}</p>
                 <p class="m-0">${new Date(
                   forecast.forecastday[index].date
-                ).getDate()}${new Date(
+                ).getDate()} ${new Date(
         forecast.forecastday[index].date
       ).toLocaleString("en-US", { month: "long" })}</p>
               </div>
@@ -94,18 +91,21 @@ function displayCards(weatherData, numOfDays = 3) {
     } else {
       cards += `<div class="col-md-6 col-lg-4 box">
             <div class="card text-center">
-              <div class="card-header">
+              <div class="card-header d-flex justify-content-between">
                 <p class="m-0">${new Date(
                   forecast.forecastday[index].date
                 ).toLocaleString("en-US", { weekday: "long" })}</p>
+                <p class="m-0">${new Date(
+                  forecast.forecastday[index].date
+                ).getDate()} ${new Date(
+        forecast.forecastday[index].date
+      ).toLocaleString("en-US", { month: "long" })}</p>
               </div>
               <div class="card-body py-5">
                 <h5 class="card-title">
                   <img src="${
                     forecast.forecastday[index].day.condition.icon
-                  }" alt="${
-        forecast.forecastday[index].day.condition.text
-      }">
+                  }" alt="${forecast.forecastday[index].day.condition.text}">
                 </h5>
                 <p class="card-text">${
                   forecast.forecastday[index].day.maxtemp_c

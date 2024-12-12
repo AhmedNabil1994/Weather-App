@@ -6,9 +6,15 @@
   --card--header-color-1: #2d303d;
   --card--header-color-2: #222530;
   --card-text-color: #bfc1c8;
-  --card-border-radius: .9375rem;
+  --card-border-radius: 0.9375rem;
 }
-/* shared classes */
+
+/* global classes */
+body {
+  font-family: sans-serif;
+  background-color: var(--first-color);
+}
+
 /* inputs */
 input.form-control {
   padding: 0.9375rem;
@@ -26,6 +32,7 @@ input.form-control {
     color: gray;
   }
 }
+
 /* inputs buttons */
 button.btn {
   position: absolute;
@@ -43,9 +50,16 @@ button.btn {
     border-color: var(--third-color) !important ;
   }
 }
-body {
-  font-family: sans-serif;
-  background-color: var(--first-color);
+/* search icon */
+.fa-search {
+  position: absolute;
+  padding: 0.625rem 1.25rem;
+  color: white;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  font-size: 1.25rem;
+  cursor: pointer;
 }
 
 /* navbar */
@@ -287,13 +301,13 @@ footer {
   /* weather cards */
   section#weather {
     .row .box .card .card-header {
-       border-top-left-radius: var(--card-border-radius);
-       border-top-right-radius: var(--card-border-radius);
-     }
+      border-top-left-radius: var(--card-border-radius);
+      border-top-right-radius: var(--card-border-radius);
+    }
     .row .box .card .card-body {
-       border-bottom-left-radius: var(--card-border-radius);
-       border-bottom-right-radius: var(--card-border-radius);
-     }
+      border-bottom-left-radius: var(--card-border-radius);
+      border-bottom-right-radius: var(--card-border-radius);
+    }
   }
 }
 
