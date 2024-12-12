@@ -35,12 +35,13 @@ searchInput.addEventListener("input", function (e) {
  * Check if the number input is valid (1-7).
     * Fetch and display weather data based on user input.
     * Defaults to "alexandria" if no city is entered.
+    * Defaults to 3 if no number is entered.
     * Clear the number input field after submission.
  */
 addBtn.addEventListener("click", function () {
   const numOfDays = numberInput.value;
   if (validateNumInput()) {
-    getWeather(searchInput.value || "alexandria", numOfDays);
+    getWeather(searchInput.value || "alexandria", numOfDays || 3);
   }
 });
 
@@ -176,11 +177,11 @@ getWeather();
 
 /**
  * @description Validates the input to ensure it is a number between 1 and 7 (inclusive).
- * @returns {boolean} - Returns `true` if the input is valid (a number between 1 and 7); otherwise, `false`.
+ * @returns {boolean} - Returns `true` if the input is valid (a number between 1 and 7) or empty to show default number (3); otherwise, `false`.
  */
 function validateNumInput() {
   const regex = /^[1-7]$/;
-  if (regex.test(numberInput.value)) {
+  if (regex.test(numberInput.value) || numberInput.value.length === 0) {
     numberErrorMsg.classList.add("d-none");
     return true;
   } else {
@@ -188,3 +189,5 @@ function validateNumInput() {
     return false;
   }
 }
+
+console.log(numberInput.value.length === 0, "numberInput.value");
