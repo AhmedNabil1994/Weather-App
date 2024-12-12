@@ -8,7 +8,7 @@ const addBtn = document.querySelector(".addBtn");
 const searchErrorMsg = document.querySelector(".errr-msg-search");
 const numberErrorMsg = document.querySelector(".errr-msg-number");
 
-// variables
+// glabal variables
 const baseURL = "https://api.weatherapi.com/v1";
 const forecast = "/forecast.json";
 const key = "d185b75d38f2481da10172021241012";
@@ -19,13 +19,13 @@ navLinksParent.addEventListener("click", function (e) {
 });
 
 searchInput.addEventListener("input", function (e) {
-  getWeather(e.target.value, numberInput.value || 3);
+  getWeather(e.target.value || "alexandria", numberInput.value || 3);
 });
 
 addBtn.addEventListener("click", function () {
   const numOfDays = +numberInput.value;
   if (validateNumInput()) {
-    getWeather(searchInput.value || "cairo", numOfDays);
+    getWeather(searchInput.value || "alexandria", numOfDays);
     // clear input
     numberInput.value = "";
   }
@@ -127,7 +127,7 @@ function displayCards(weatherData, numOfDays = 3) {
 }
 
 getWeather();
-async function getWeather(city = "cairo", numOfDays = 3) {
+async function getWeather(city = "alexandria", numOfDays = 3) {
   try {
     searchErrorMsg.classList.add("d-none");
     let res = await fetch(
