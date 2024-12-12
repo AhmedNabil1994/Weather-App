@@ -30,18 +30,15 @@ searchInput.addEventListener("input", function (e) {
 });
 
 /*
- * Parse the number of days input as an integer 
-  (to avoid any error although it works as a string)
  * Check if the number input is valid (1-7).
-    * Fetch and display weather data based on user input.
-    * Defaults to "alexandria" if no city is entered.
-    * Defaults to 3 if no number is entered.
-    * Clear the number input field after submission.
+ * Fetch and display weather data based on user input.
+ * Defaults to "alexandria" if no city is entered.
+ * Defaults to 3 if no number is entered.
+ * Clear the number input field after submission.
  */
 addBtn.addEventListener("click", function () {
-  const numOfDays = numberInput.value;
   if (validateNumInput()) {
-    getWeather(searchInput.value || "alexandria", numOfDays || 3);
+    getWeather(searchInput.value || "alexandria", numberInput.value || 3);
   }
 });
 
@@ -188,4 +185,3 @@ function validateNumInput() {
     return false;
   }
 }
-
