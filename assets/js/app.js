@@ -1,5 +1,5 @@
 "use strict";
-// DOM elements
+// Global DOM elements
 const navLinksParent = document.querySelector("ul.navbar-nav");
 const weatherCardsContainer = document.querySelector("#weather .row");
 const searchInput = document.getElementById("search");
@@ -8,7 +8,7 @@ const addBtn = document.querySelector(".addBtn");
 const searchErrorMsg = document.querySelector(".errr-msg-search");
 const numberErrorMsg = document.querySelector(".errr-msg-number");
 
-// glabal variables
+// Glabal Variables of API URL
 const baseURL = "https://api.weatherapi.com/v1";
 const forecast = "/forecast.json";
 const key = "d185b75d38f2481da10172021241012";
@@ -126,7 +126,6 @@ function displayCards(weatherData, numOfDays = 3) {
   weatherCardsContainer.innerHTML = cards;
 }
 
-getWeather();
 async function getWeather(city = "alexandria", numOfDays = 3) {
   try {
     searchErrorMsg.classList.add("d-none");
@@ -149,6 +148,7 @@ async function getWeather(city = "alexandria", numOfDays = 3) {
     searchErrorMsg.classList.remove("d-none");
   }
 }
+getWeather();
 
 function validateNumInput() {
   const regex = /^[1-7]$/;
