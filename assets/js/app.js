@@ -34,7 +34,7 @@ searchInput.addEventListener("input", function (e) {
  * Fetch and display weather data based on user input.
  * Defaults to "alexandria" if no city is entered.
  * Defaults to 3 if no number is entered.
- * Clear the number input field after submission.
+ * Clear the number input field after add.
  */
 addBtn.addEventListener("click", function () {
   if (validateNumInput()) {
