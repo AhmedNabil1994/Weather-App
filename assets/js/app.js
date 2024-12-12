@@ -18,21 +18,34 @@ navLinksParent.addEventListener("click", function (e) {
   styleClickedLink(e.target);
 });
 
+/*
+ * Fetches and displays weather data based on user input.
+ * If no city is entered, defaults to "alexandria".
+ * If no number of days is specified, defaults to 3 days.
+ * e.target.value - The city entered by the user.
+ * numberInput.value - The number of forecast days entered by the user.
+ */
 searchInput.addEventListener("input", function (e) {
   getWeather(e.target.value || "alexandria", numberInput.value || 3);
 });
 
+/*
+ * Parse the number of days input as an integer 
+  (to avoid any error although it works as a string)
+ * Check if the number input is valid (1-7).
+    * Fetch and display weather data based on user input.
+    * Defaults to "alexandria" if no city is entered.
+    * Clear the number input field after submission.
+ */
 addBtn.addEventListener("click", function () {
-  const numOfDays = +numberInput.value;
+  const numOfDays = numberInput.value;
   if (validateNumInput()) {
     getWeather(searchInput.value || "alexandria", numOfDays);
-    // clear input
     numberInput.value = "";
   }
 });
 
 // functions
-
 /**
  * @description Adds the "active" class to the clicked navigation link and removes it from all other navigation links.
  * @param {HTMLElement} clickedLink - The navigation link that was clicked.
