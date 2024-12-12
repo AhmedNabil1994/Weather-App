@@ -32,6 +32,11 @@ addBtn.addEventListener("click", function () {
 });
 
 // functions
+
+/**
+ * @description Adds the "active" class to the clicked navigation link and removes it from all other navigation links.
+ * @param {HTMLElement} clickedLink - The navigation link that was clicked.
+ */
 function styleClickedLink(clickedLink) {
   if (clickedLink.classList.contains("nav-link")) {
     document.querySelectorAll(".nav-link").forEach((link) => {
@@ -41,6 +46,11 @@ function styleClickedLink(clickedLink) {
   }
 }
 
+/**
+ * @description Dynamically generates and displays weather forecast cards for a specified number of days.
+ * @param {Object} weatherData - The weather data object containing current, forecast, and location data.
+ * @param {number} [numOfDays=3] - The number of forecast days to display. Defaults to 3.
+ */
 function displayCards(weatherData, numOfDays = 3) {
   let cards = "";
   const { current } = weatherData;
@@ -126,6 +136,11 @@ function displayCards(weatherData, numOfDays = 3) {
   weatherCardsContainer.innerHTML = cards;
 }
 
+/**
+ * @description Fetches weather data for a given city and displays weather forecast cards.
+ * @param {string} [city="alexandria"] - The name of the city to fetch weather data for. Defaults to "alexandria".
+ * @param {number} [numOfDays=3] - The number of forecast days to retrieve. Defaults to 3.
+ */
 async function getWeather(city = "alexandria", numOfDays = 3) {
   try {
     searchErrorMsg.classList.add("d-none");
@@ -150,6 +165,10 @@ async function getWeather(city = "alexandria", numOfDays = 3) {
 }
 getWeather();
 
+/**
+ * @description Validates the input to ensure it is a number between 1 and 7 (inclusive).
+ * @returns {boolean} - Returns `true` if the input is valid (a number between 1 and 7); otherwise, `false`.
+ */
 function validateNumInput() {
   const regex = /^[1-7]$/;
   console.log(regex.test(numberInput.value));
