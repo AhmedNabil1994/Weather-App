@@ -43,44 +43,49 @@ function styleClickedLink(clickedLink) {
 
 function displayCards(weatherData, numOfDays = 3) {
   let cards = "";
+  const { current } = weatherData;
+  const { forecast } = weatherData;
+  const { location } = weatherData;
+  console.log(weatherData, " weatherData");
+  // console.log(forecast, " forecast");
+  // console.log(location, " location");
   for (let index = 0; index < numOfDays; index++) {
     if (index === 0) {
       cards += ` <div class="col-md-6 col-lg-4 box">
             <div class="card">
               <div class="card-header d-flex justify-content-between">
                 <p class="m-0">${new Date(
-                  weatherData.forecast.forecastday[index].date
+                  forecast.forecastday[index].date
                 ).toLocaleString("en-US", { weekday: "long" })}</p>
                 <p class="m-0">${new Date(
-                  weatherData.forecast.forecastday[index].date
+                  forecast.forecastday[index].date
                 ).getDate()}${new Date(
-        weatherData.forecast.forecastday[index].date
+        forecast.forecastday[index].date
       ).toLocaleString("en-US", { month: "long" })}</p>
               </div>
               <div class="card-body py-5">
-                <h5 class="card-title">${weatherData.location.name}</h5>
-                <p class="card-text">${weatherData.current.temp_c}&deg;C</p>
+                <h5 class="card-title">${location.name}</h5>
+                <p class="card-text">${current.temp_c}&deg;C</p>
                 <div class="d-flex justify-content-between align-items-center status">
-                  <img src="${weatherData.current.condition.icon}" alt="${
-        weatherData.current.condition.text
+                  <img src="${current.condition.icon}" alt="${
+        current.condition.text
       }">
-                  <p class="m-0">${weatherData.current.condition.text}</p>
+                  <p class="m-0">${current.condition.text}</p>
                 </div>
                 <div class="icons d-flex">
                   <div class="me-2">
                     <i class="fa-solid fa-umbrella"></i>
                     <span>${
-                      weatherData.forecast.forecastday[index].day
-                        .daily_chance_of_rain
+                      forecast.forecastday[index].day.daily_chance_of_rain
                     }%</span>
                   </div>
                   <div class="me-2">
                     <i class="fa-solid fa-wind"></i>
-                    <span>${weatherData.current.wind_kph}km/h</span>
+                    <span>${current.wind_kph}km/h</span>
                   </div>
                   <div>
                     <i class="fa-solid fa-compass"></i>
-                    <span>${weatherData.current.wind_dir}</span>
+                    <span>${current.wind_dir}</span>
                   </div>
                 </div>
               </div>
@@ -91,26 +96,26 @@ function displayCards(weatherData, numOfDays = 3) {
             <div class="card text-center">
               <div class="card-header">
                 <p class="m-0">${new Date(
-                  weatherData.forecast.forecastday[index].date
+                  forecast.forecastday[index].date
                 ).toLocaleString("en-US", { weekday: "long" })}</p>
               </div>
               <div class="card-body py-5">
                 <h5 class="card-title">
                   <img src="${
-                    weatherData.forecast.forecastday[index].day.condition.icon
+                    forecast.forecastday[index].day.condition.icon
                   }" alt="${
-        weatherData.forecast.forecastday[index].day.condition.text
+        forecast.forecastday[index].day.condition.text
       }">
                 </h5>
                 <p class="card-text">${
-                  weatherData.forecast.forecastday[index].day.maxtemp_c
+                  forecast.forecastday[index].day.maxtemp_c
                 }&deg;C</p>
                 <div class="status">
                   <p class="">${
-                    weatherData.forecast.forecastday[index].day.mintemp_c
+                    forecast.forecastday[index].day.mintemp_c
                   }&deg;</p>
                   <p class="m-0">${
-                    weatherData.forecast.forecastday[index].day.condition.text
+                    forecast.forecastday[index].day.condition.text
                   }</p>
                 </div>
               </div>
@@ -146,7 +151,8 @@ async function getWeather(city = "cairo", numOfDays = 3) {
 }
 
 function validateNumInput() {
-  const regex = /[1-7]/;
+  const regex = /^[1-7]$/;
+  console.log(regex.test(numberInput.value));
   if (regex.test(numberInput.value)) {
     numberErrorMsg.classList.add("d-none");
     return true;
