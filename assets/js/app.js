@@ -66,9 +66,8 @@ function styleClickedLink(clickedLink) {
  */
 function displayCards(weatherData, numOfDays = 3) {
   let cards = "";
-  const { current } = weatherData;
-  const { forecast } = weatherData;
-  const { location } = weatherData;
+  // object destructuring
+  const { current, forecast, location } = weatherData;
   for (let index = 0; index < numOfDays; index++) {
     if (index === 0) {
       cards += ` <div class="col-md-6 col-lg-4 box">
@@ -190,4 +189,3 @@ function validateNumInput() {
   }
 }
 
-console.log(numberInput.value.length === 0, "numberInput.value");
