@@ -162,16 +162,13 @@ async function getWeather(city = "alexandria", numOfDays = 3) {
     );
     let weatherDetails = await res.json();
     if (res.ok) {
-      console.log(weatherDetails);
       displayCards(weatherDetails, numOfDays);
       searchErrorMsg.classList.add("d-none");
     } else {
-      console.log(weatherDetails.error);
       searchErrorMsg.innerHTML = "No matching location found.";
       searchErrorMsg.classList.remove("d-none");
     }
   } catch (error) {
-    console.log(error);
     searchErrorMsg.innerHTML = "Invalid URL";
     searchErrorMsg.classList.remove("d-none");
   }
@@ -184,7 +181,6 @@ getWeather();
  */
 function validateNumInput() {
   const regex = /^[1-7]$/;
-  console.log(regex.test(numberInput.value));
   if (regex.test(numberInput.value)) {
     numberErrorMsg.classList.add("d-none");
     return true;
