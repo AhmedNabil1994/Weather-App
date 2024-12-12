@@ -41,7 +41,6 @@ addBtn.addEventListener("click", function () {
   const numOfDays = numberInput.value;
   if (validateNumInput()) {
     getWeather(searchInput.value || "alexandria", numOfDays);
-    numberInput.value = "";
   }
 });
 
