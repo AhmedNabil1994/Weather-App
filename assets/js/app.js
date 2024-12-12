@@ -39,6 +39,7 @@ searchInput.addEventListener("input", function (e) {
 addBtn.addEventListener("click", function () {
   if (validateNumInput()) {
     getWeather(searchInput.value || "alexandria", numberInput.value || 3);
+    number.value = ""
   }
 });
 
